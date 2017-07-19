@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="co.com.arrendamientosnutibara.main.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <LinearLayout android:layout_weight="0.5"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:gravity="center"
+        android:id="@+id/route_button"
+        android:orientation="vertical"
+        android:background="@color/colorAccent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:transitionName="route"
+            android:id="@+id/route_logo"
+            app:srcCompat="@drawable/ic_route"
+            android:layout_height="wrap_content" />
+
+        <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
+            android:layout_width="wrap_content"
+            android:text="ARMAR RUTA"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/colorWhite"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_weight="0.5"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryDark"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            app:srcCompat="@drawable/ic_folder"
+            android:layout_height="wrap_content" />
+
+        <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
+            android:layout_width="wrap_content"
+            android:text="MIS INVENTARIOS"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/colorWhite"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_weight="0.5"
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            app:srcCompat="@drawable/ic_end_route"
+            android:layout_height="wrap_content" />
+
+        <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
+            android:layout_width="wrap_content"
+            android:text="TERMINAR RUTA"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/colorWhite"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

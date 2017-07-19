@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="co.com.arrendamientosnutibara.main.LoginActivity"
+    android:padding="16dp"
+    tools:showIn="@layout/activity_login">
+
+    <ImageView app:srcCompat="@drawable/ic_logo"
+        android:layout_width="wrap_content"
+        android:id="@+id/image_logo"
+        android:transitionName="logo"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <co.com.arrendamientosnutibara.widgets.CenturyRegularEditText
+                android:id="@+id/code_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Codigo" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <co.com.arrendamientosnutibara.widgets.CenturyBoldButton
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="Ingresa"
+            android:id="@+id/login_button"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>
