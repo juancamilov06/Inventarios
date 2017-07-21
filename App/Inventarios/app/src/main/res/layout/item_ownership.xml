@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_weight="0.9"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <ImageView app:srcCompat="@drawable/ic_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/code_label"
+            android:text="80005" />
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_weight="0.5"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content">
+
+            <co.com.arrendamientosnutibara.widgets.CenturyBoldTextView
+                android:layout_width="wrap_content"
+                android:text="DIRECCION"
+                android:layout_height="wrap_content" />
+
+            <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
+                android:layout_width="wrap_content"
+                android:id="@+id/address_label"
+                android:text="Crr 88 N° 44 45"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content">
+
+            <co.com.arrendamientosnutibara.widgets.CenturyBoldTextView
+                android:layout_width="wrap_content"
+                android:text="BARRIO"
+                android:layout_height="wrap_content" />
+
+            <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
+                android:layout_width="wrap_content"
+                android:id="@+id/neighborhood_label"
+                android:text="Los Alcazares"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_weight="0.74"
+        android:layout_width="match_parent"
+        android:gravity="center" android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <co.com.arrendamientosnutibara.widgets.CenturyBoldButton
+            android:layout_width="match_parent"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="BORRAR"
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:id="@+id/delete_button"
+            android:layout_height="match_parent" />
+
+        <co.com.arrendamientosnutibara.widgets.CenturyBoldButton
+            android:layout_width="match_parent"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="VER"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
+            android:id="@+id/detail_button"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</LinearLayout>

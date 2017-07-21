@@ -3,15 +3,79 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/transitions_container"
+    android:layout_height="wrap_content"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="co.com.arrendamientosnutibara.main.CreateRouteActivity"
     tools:showIn="@layout/activity_create_route">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+    <LinearLayout
+        android:gravity="center" android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <co.com.arrendamientosnutibara.widgets.CenturyBoldButton
+            android:id="@+id/current_route_button"
+            android:visibility="invisible"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:background="@color/colorAccentToolbar"
+            android:text="VER RUTA ACTUAL"
+            android:textColor="@color/colorWhite" />
+
+        <LinearLayout android:orientation="vertical"
+            android:padding="16dp"
+            android:id="@+id/code_content"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <co.com.arrendamientosnutibara.widgets.CenturyBoldTextView
+                android:layout_width="wrap_content"
+                android:text="INGRESA EL CODIGO"
+                android:layout_height="wrap_content" />
+
+            <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
+                android:layout_width="wrap_content"
+                android:text="DEL INMUEBLE"
+                android:layout_height="wrap_content" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content">
+
+                <co.com.arrendamientosnutibara.widgets.CenturyRegularEditText
+                    android:id="@+id/code_input"
+                    android:drawableStart="@drawable/ic_edittext_home"
+                    android:drawablePadding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Codigo" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <co.com.arrendamientosnutibara.widgets.CenturyBoldButton
+                    android:id="@+id/search_button"
+                    android:layout_width="match_parent"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:text="BUSCAR"
+                    android:textColor="@color/colorWhite"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:background="@color/colorPrimary" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
