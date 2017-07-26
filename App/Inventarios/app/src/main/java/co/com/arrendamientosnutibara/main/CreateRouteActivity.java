@@ -1,20 +1,25 @@
 package co.com.arrendamientosnutibara.main;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import com.transitionseverywhere.Slide;
 import com.transitionseverywhere.TransitionManager;
@@ -26,11 +31,13 @@ import co.com.arrendamientosnutibara.entities.Ownership;
 import co.com.arrendamientosnutibara.entities.OwnershipDao;
 import co.com.arrendamientosnutibara.helpers.Utils;
 import co.com.arrendamientosnutibara.widgets.CenturyBoldButton;
+import co.com.arrendamientosnutibara.widgets.CenturyRegularTextView;
 
 
 public class CreateRouteActivity extends AppCompatActivity {
 
     private CollapsingToolbarLayout collapsingToolbar;
+    private Context context;
     private OwnershipDao ownershipDao;
     private boolean visible = false;
     private ViewGroup container;
@@ -40,6 +47,8 @@ public class CreateRouteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_route);
+
+        context = CreateRouteActivity.this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,7 +64,7 @@ public class CreateRouteActivity extends AppCompatActivity {
         container.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(CreateRouteActivity.this, InventoryActivity.class));
             }
         });
         container.findViewById(R.id.current_route_button).setOnClickListener(new View.OnClickListener() {
@@ -82,6 +91,37 @@ public class CreateRouteActivity extends AppCompatActivity {
         visible = true;
         TransitionManager.beginDelayedTransition(container, new Slide(Gravity.RIGHT));
         currentRouteButton.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    private AlertDialog getDetailDialog(Ownership ownership) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = View.inflate(context, R.layout.dialog_ownership_detail, null);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+
+        CenturyRegularTextView addressLabel = view.findViewById(R.id.address_label);
+        addressLabel.setText("CRR 88 N° 44 45");
+        CenturyRegularTextView typeLabel = view.findViewById(R.id.type_label);
+        typeLabel.setText("Apartamento");
+        CenturyRegularTextView ownerLabel = view.findViewById(R.id.owner_label);
+        ownerLabel.setText("Juan Camilo Villa Amaya");
+
+        CenturyBoldButton addButton = view.findViewById(R.id.add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        CenturyBoldButton cancelButton = view.findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        return dialog;
     }
 
     @Override

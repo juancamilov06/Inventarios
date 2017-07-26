@@ -19,7 +19,7 @@
             android:visibility="invisible"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="0.4"
             android:background="@color/colorAccentToolbar"
             android:text="VER RUTA ACTUAL"
@@ -64,7 +64,7 @@
 
                 <co.com.arrendamientosnutibara.widgets.CenturyBoldButton
                     android:id="@+id/search_button"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:text="BUSCAR"
                     android:textColor="@color/colorWhite"

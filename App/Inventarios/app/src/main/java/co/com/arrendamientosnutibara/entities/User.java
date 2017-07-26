@@ -15,11 +15,11 @@ public class User {
     @Id
     private long id;
     @NotNull
-    private String name;
-    @Generated(hash = 387211104)
-    public User(long id, @NotNull String name) {
+    private String token;
+    @Generated(hash = 780400483)
+    public User(long id, @NotNull String token) {
         this.id = id;
-        this.name = name;
+        this.token = token;
     }
     @Generated(hash = 586692638)
     public User() {
@@ -30,11 +30,11 @@ public class User {
     public void setId(long id) {
         this.id = id;
     }
-    public String getName() {
-        return this.name;
+    public String getToken() {
+        return this.token;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setToken(String token) {
+        this.token = token;
     }
 
 }

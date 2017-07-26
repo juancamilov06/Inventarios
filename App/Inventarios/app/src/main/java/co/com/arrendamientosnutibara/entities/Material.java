@@ -44,5 +44,6 @@ public class Material{
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+    
 
 }

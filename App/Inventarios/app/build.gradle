@@ -27,6 +27,9 @@ dependencies {
     })
     compile 'com.andkulikov:transitionseverywhere:1.7.4'
     compile 'org.greenrobot:greendao:3.2.2'
+    compile 'com.bignerdranch.android:expandablerecyclerview:3.0.0-RC1'
+    compile 'com.amitshekhar.android:android-networking:1.0.0'
+    compile 'com.google.android.gms:play-services-maps:11.0.2'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:26.+'

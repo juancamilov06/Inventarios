@@ -15,26 +15,28 @@ public class Type {
     @Id
     private long id;
     @NotNull
-    private String name;
-    @Generated(hash = 734309441)
-    public Type(long id, @NotNull String name) {
+    private String type;
+
+    @Generated(hash = 453093116)
+    public Type(long id, @NotNull String type) {
         this.id = id;
-        this.name = name;
+        this.type = type;
     }
     @Generated(hash = 1782799822)
     public Type() {
     }
+    
     public long getId() {
         return this.id;
     }
     public void setId(long id) {
         this.id = id;
     }
-    public String getName() {
-        return this.name;
+    public String getType() {
+        return this.type;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
 

@@ -45,7 +45,8 @@ public class Inventory {
     private transient InventoryDao myDao;
 
     @Generated(hash = 337038447)
-    public Inventory(long id, String observations, long ownershipId, long userId, boolean isFinished) {
+    public Inventory(long id, String observations, long ownershipId, long userId,
+            boolean isFinished) {
         this.id = id;
         this.observations = observations;
         this.ownershipId = ownershipId;
@@ -79,6 +80,22 @@ public class Inventory {
 
     public void setOwnershipId(long ownershipId) {
         this.ownershipId = ownershipId;
+    }
+
+    public long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public boolean getIsFinished() {
+        return this.isFinished;
+    }
+
+    public void setIsFinished(boolean isFinished) {
+        this.isFinished = isFinished;
     }
 
     @Generated(hash = 1763863372)
@@ -181,22 +198,6 @@ public class Inventory {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
-    }
-
-    public long getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public boolean getIsFinished() {
-        return this.isFinished;
-    }
-
-    public void setIsFinished(boolean isFinished) {
-        this.isFinished = isFinished;
     }
 
     /** called by internal mechanisms, do not call yourself. */

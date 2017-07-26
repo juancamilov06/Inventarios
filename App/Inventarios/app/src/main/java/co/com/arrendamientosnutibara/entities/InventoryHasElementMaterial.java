@@ -3,8 +3,8 @@ package co.com.arrendamientosnutibara.entities;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.ToOne;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 
 /**
@@ -33,9 +33,7 @@ public class InventoryHasElementMaterial {
     /** Used for active entity operations. */
     @Generated(hash = 2054463784)
     private transient InventoryHasElementMaterialDao myDao;
-    @Generated(hash = 277658736)
-    private transient Long section__resolvedKey;
-    
+
     @Generated(hash = 387186076)
     public InventoryHasElementMaterial(long id, @NotNull String status,
             String imgUrl, long inventoryId, long elementMaterialId,
@@ -50,6 +48,9 @@ public class InventoryHasElementMaterial {
     @Generated(hash = 749455735)
     public InventoryHasElementMaterial() {
     }
+    @Generated(hash = 277658736)
+    private transient Long section__resolvedKey;
+
     public long getId() {
         return this.id;
     }
@@ -156,5 +157,4 @@ public class InventoryHasElementMaterial {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getInventoryHasElementMaterialDao() : null;
     }
-
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:background="@color/colorAccent"
+    android:layout_height="wrap_content">
+
+    <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
+        android:layout_width="match_parent"
+        android:text="Chapter"
+        android:layout_weight="0.3"
+        android:paddingLeft="16dp"
+        android:textSize="17sp"
+        android:id="@+id/title_label"
+        android:textColor="@color/colorWhite"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout android:layout_weight="0.7"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal|right"
+        android:layout_height="match_parent">
+
+        <ImageView app:srcCompat="@drawable/ic_dropdown_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

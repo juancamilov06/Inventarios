@@ -29,6 +29,8 @@
 
             <co.com.arrendamientosnutibara.widgets.CenturyRegularEditText
                 android:id="@+id/code_input"
+                android:drawableStart="@drawable/ic_edittext_user"
+                android:drawablePadding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Codigo" />

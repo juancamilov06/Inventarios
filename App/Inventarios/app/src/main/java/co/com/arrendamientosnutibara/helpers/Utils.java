@@ -21,17 +21,21 @@ public class Utils {
 
         Dialog dialog = new Dialog(context, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
         View view = View.inflate(context, R.layout.dialog_loading, null);
+        dialog.setCanceledOnTouchOutside(false);
         dialog.setContentView(view);
+        startRotatingView(view.findViewById(R.id.loading_logo));
+        return dialog;
+    }
 
-        ObjectAnimator animation = ObjectAnimator.ofFloat(view.findViewById(R.id.loading_logo), "rotationY", 0.0f, 360f);
+    public static void startRotatingView(View view){
 
-        animation.setDuration(1000);
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "rotationY", 0.0f, 360f);
+        animation.setDuration(3000);
         animation.setRepeatMode(ObjectAnimator.RESTART);
         animation.setRepeatCount(ObjectAnimator.INFINITE);
         animation.setInterpolator(new AccelerateDecelerateInterpolator());
         animation.start();
 
-        return dialog;
     }
 
 }

@@ -21,12 +21,12 @@ public class Element {
     @Id
     private long id;
     @NotNull
-    private String name;
+    private String element;
     @NotNull
-    private long chapterId;
+    private long sectionId;
 
-    @ToOne(joinProperty = "chapterId")
-    private Chapter chapter;
+    @ToOne(joinProperty = "sectionId")
+    private Section section;
 
     @ToMany
     @JoinEntity(
@@ -42,11 +42,11 @@ public class Element {
     @Generated(hash = 686058481)
     private transient ElementDao myDao;
 
-    @Generated(hash = 2135576737)
-    public Element(long id, @NotNull String name, long chapterId) {
+    @Generated(hash = 1872101513)
+    public Element(long id, @NotNull String element, long sectionId) {
         this.id = id;
-        this.name = name;
-        this.chapterId = chapterId;
+        this.element = element;
+        this.sectionId = sectionId;
     }
 
     @Generated(hash = 386918278)
@@ -61,55 +61,55 @@ public class Element {
         this.id = id;
     }
 
-    public String getName() {
-        return this.name;
+    public String getElement() {
+        return this.element;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setElement(String element) {
+        this.element = element;
     }
 
-    public long getChapterId() {
-        return this.chapterId;
+    public long getSectionId() {
+        return this.sectionId;
     }
 
-    public void setChapterId(long chapterId) {
-        this.chapterId = chapterId;
+    public void setSectionId(long sectionId) {
+        this.sectionId = sectionId;
     }
 
-    @Generated(hash = 647692238)
-    private transient Long chapter__resolvedKey;
+    @Generated(hash = 277658736)
+    private transient Long section__resolvedKey;
 
     /** To-one relationship, resolved on first access. */
-    @Generated(hash = 453768668)
-    public Chapter getChapter() {
-        long __key = this.chapterId;
-        if (chapter__resolvedKey == null || !chapter__resolvedKey.equals(__key)) {
+    @Generated(hash = 1090999800)
+    public Section getSection() {
+        long __key = this.sectionId;
+        if (section__resolvedKey == null || !section__resolvedKey.equals(__key)) {
             final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
-            ChapterDao targetDao = daoSession.getChapterDao();
-            Chapter chapterNew = targetDao.load(__key);
+            SectionDao targetDao = daoSession.getSectionDao();
+            Section sectionNew = targetDao.load(__key);
             synchronized (this) {
-                chapter = chapterNew;
-                chapter__resolvedKey = __key;
+                section = sectionNew;
+                section__resolvedKey = __key;
             }
         }
-        return chapter;
+        return section;
     }
 
     /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 776640969)
-    public void setChapter(@NotNull Chapter chapter) {
-        if (chapter == null) {
+    @Generated(hash = 423846855)
+    public void setSection(@NotNull Section section) {
+        if (section == null) {
             throw new DaoException(
-                    "To-one property 'chapterId' has not-null constraint; cannot set to-one to null");
+                    "To-one property 'sectionId' has not-null constraint; cannot set to-one to null");
         }
         synchronized (this) {
-            this.chapter = chapter;
-            chapterId = chapter.getId();
-            chapter__resolvedKey = chapterId;
+            this.section = section;
+            sectionId = section.getId();
+            section__resolvedKey = sectionId;
         }
     }
 

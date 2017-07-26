@@ -1,9 +1,14 @@
 package co.com.arrendamientosnutibara.entities;
 
+import com.bignerdranch.expandablerecyclerview.model.Parent;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
+import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.ToOne;
+
+import java.util.List;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 
@@ -12,7 +17,7 @@ import org.greenrobot.greendao.DaoException;
  */
 
 @Entity
-public class Section {
+public class Section implements Parent<Element> {
 
     @Id
     private long id;
@@ -23,6 +28,9 @@ public class Section {
 
     @ToOne(joinProperty = "typeId")
     private Type type;
+
+    @ToMany(referencedJoinProperty = "sectionId")
+    private List<Element> sectionElements;
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
@@ -40,6 +48,9 @@ public class Section {
     @Generated(hash = 111791983)
     public Section() {
     }
+
+    @Generated(hash = 506996655)
+    private transient Long type__resolvedKey;
 
     public long getId() {
         return this.id;
@@ -65,8 +76,15 @@ public class Section {
         this.typeId = typeId;
     }
 
-    @Generated(hash = 506996655)
-    private transient Long type__resolvedKey;
+    @Override
+    public List<Element> getChildList() {
+        return sectionElements;
+    }
+
+    @Override
+    public boolean isInitiallyExpanded() {
+        return false;
+    }
 
     /** To-one relationship, resolved on first access. */
     @Generated(hash = 736320828)
@@ -99,6 +117,35 @@ public class Section {
             typeId = type.getId();
             type__resolvedKey = typeId;
         }
+    }
+
+    /**
+     * To-many relationship, resolved on first access (and after reset).
+     * Changes to to-many relations are not persisted, make changes to the target entity.
+     */
+    @Generated(hash = 954685634)
+    public List<Element> getSectionElements() {
+        if (sectionElements == null) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            ElementDao targetDao = daoSession.getElementDao();
+            List<Element> sectionElementsNew = targetDao
+                    ._querySection_SectionElements(id);
+            synchronized (this) {
+                if (sectionElements == null) {
+                    sectionElements = sectionElementsNew;
+                }
+            }
+        }
+        return sectionElements;
+    }
+
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    @Generated(hash = 885488194)
+    public synchronized void resetSectionElements() {
+        sectionElements = null;
     }
 
     /**
@@ -143,6 +190,5 @@ public class Section {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getSectionDao() : null;
     }
-
 
 }

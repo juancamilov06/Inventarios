@@ -2,6 +2,8 @@ package co.com.arrendamientosnutibara.application;
 
 import android.app.Application;
 
+import com.androidnetworking.AndroidNetworking;
+
 import org.greenrobot.greendao.database.Database;
 
 import co.com.arrendamientosnutibara.entities.DaoMaster;
@@ -19,10 +21,14 @@ public class NutibaraApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        AndroidNetworking.initialize(getApplicationContext());
+
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "inventory-db");
         Database db = helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
         instance = this;
+
     }
 
     public static NutibaraApplication getApplicationInstance(){
@@ -32,5 +38,6 @@ public class NutibaraApplication extends Application {
     public DaoSession getDaoSession(){
         return daoSession;
     }
+
 
 }
