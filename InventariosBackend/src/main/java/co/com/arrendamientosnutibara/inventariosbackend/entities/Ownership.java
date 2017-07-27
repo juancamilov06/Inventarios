@@ -19,7 +19,7 @@ public class Ownership {
     private double longitude;
     private String ownerName;
     private int typeId;
-    private String type;
+    private transient String type;
     private String lessee;
     private String lesseePhone;
     private String neighborhood;

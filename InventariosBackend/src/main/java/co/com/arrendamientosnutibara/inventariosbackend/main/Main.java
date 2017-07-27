@@ -18,26 +18,31 @@ import static spark.Spark.*;
 public class Main {
 
     public static void main(String[] args){     
-                       
-        post("/auth", (req, res) -> {
-            res.type("application/json");
-            AuthController controller = new AuthController();
-            return controller.login(req, res).body();
-        });   
+        
+        path("/auth", () -> {
+            post("", (req, res) -> {
+                res.type("application/json");
+                AuthController controller = new AuthController();
+                return controller.login(req, res).body();
+            });         
+        });       
+          
         path("/ownership", () -> {
             get("/:code", (req, res) -> {
                 res.type("application/json");
                 OwnershipController controller = new OwnershipController();
                 return controller.getOwnership(req, res).body();
-            });            
-        });       
+            });     
+        });   
         
-        get("/basic", (req, res) -> {
-            res.type("application/json");
-            BasicController controller = new BasicController();
-            return controller.getBaseData(req, res).body();
-        });
-        
+        path("/basic", () -> {
+            get("", (req, res) -> {
+                res.type("application/json");
+                BasicController controller = new BasicController();
+                return controller.getBaseData(req, res).body();
+            });
+        });      
+                
     }
 
 }

@@ -1,32 +1,34 @@
 package co.com.arrendamientosnutibara.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.daimajia.numberprogressbar.NumberProgressBar;
+import com.ocpsoft.pretty.time.PrettyTime;
+
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import co.com.arrendamientosnutibara.entities.Ownership;
+import co.com.arrendamientosnutibara.entities.Route;
 import co.com.arrendamientosnutibara.main.R;
 import co.com.arrendamientosnutibara.widgets.CenturyRegularTextView;
 
 /**
- * Created by jva807 on 21/07/2017.
+ * Created by jva807 on 27/07/2017.
  */
 
 public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder>{
 
+    private List<Route> routes;
+    private int resource;
 
-    private final int resource;
-    private final Context context;
-    private final List<Ownership> ownerships;
-
-    public RouteAdapter(Context context, int resource, List<Ownership> ownerships){
+    public RouteAdapter(int resource, List<Route> routes){
         this.resource = resource;
-        this.context = context;
-        this.ownerships = ownerships;
+        this.routes = routes;
     }
 
     @Override
@@ -37,28 +39,48 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Ownership ownership = ownerships.get(position);
-        if (ownership != null){
-            holder.addressLabel.setText(ownership.getAddress());
-            holder.codeLabel.setText(String.valueOf(ownership.getId()));
-            holder.neighborhood.setText(ownership.getNeighborhood());
+        Route route = routes.get(position);
+        holder.dateLabel.setText(getPeriodOfTime(route));
+        holder.progressBar.setProgress(getCurrentProgress(route));
+    }
+
+    private String getPeriodOfTime(Route route){
+        PrettyTime time = new PrettyTime(new Locale("es"));
+        return time.format(new Date(route.getCreated()));
+    }
+
+    private int getCurrentProgress(Route route){
+        List<Ownership> ownerships = route.getOwnershipsInRoute();
+        if(ownerships.size() == 0){
+            return 0;
         }
+        return Math.round((countFinishedOwnerships(ownerships) * 100)/ownerships.size());
+    }
+
+    private int countFinishedOwnerships(List<Ownership> ownerships){
+        int finished = 0;
+        for (Ownership ownership: ownerships) {
+            if (ownership.getIsActive()){
+                finished++;
+            }
+        }
+        return finished;
     }
 
     @Override
     public int getItemCount() {
-        return ownerships.size();
+        return routes.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        CenturyRegularTextView codeLabel, addressLabel, neighborhood;
+        private NumberProgressBar progressBar;
+        private CenturyRegularTextView dateLabel;
 
-        ViewHolder(View view) {
+        public ViewHolder(View view) {
             super(view);
-            this.neighborhood = view.findViewById(R.id.neighborhood_label);
-            this.addressLabel = view.findViewById(R.id.address_label);
-            this.codeLabel = view.findViewById(R.id.code_label);
+            this.progressBar = view.findViewById(R.id.progress_bar);
+            this.dateLabel = view.findViewById(R.id.date_label);
         }
     }
 

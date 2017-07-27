@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import co.com.arrendamientosnutibara.application.NutibaraApplication;
+import co.com.arrendamientosnutibara.entities.UserDao;
 import co.com.arrendamientosnutibara.main.R;
 
 /**
@@ -16,6 +17,17 @@ import co.com.arrendamientosnutibara.main.R;
  */
 
 public class Utils {
+
+    public static String getAuthToken(){
+        UserDao userDao = NutibaraApplication.getApplicationInstance().getDaoSession().getUserDao();
+        return userDao.queryBuilder().where(UserDao.Properties.Id.eq(1)).unique().getToken();
+    }
+
+    public static long getRandId(){
+        long leftLimit = 0L;
+        long rightLimit = Long.MAX_VALUE;
+        return leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+    }
 
     public static Dialog getLoadingDialog(Context context){
 

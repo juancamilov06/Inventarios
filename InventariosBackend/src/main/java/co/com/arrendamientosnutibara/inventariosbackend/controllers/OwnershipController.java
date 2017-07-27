@@ -13,6 +13,7 @@ import co.com.arrendamientosnutibara.inventariosbackend.helpers.TokenUtils;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.google.gson.Gson;
 import java.io.UnsupportedEncodingException;
+import org.json.JSONObject;
 import spark.Request;
 import spark.Response;
 
@@ -39,17 +40,21 @@ public class OwnershipController {
             }      
             
             TokenUtils.verifyToken(token);
-            Ownership ownership = OwnershipDAO.getOwnership(code);
-            
+            Ownership ownership = OwnershipDAO.getOwnership(code);            
             if(ownership == null){                
-                res.body(CommonResponses._OK_BUT_FAIL_BODY
+                ownership = OwnershipDAO.getReturnedOwnership(code);
+                if(ownership == null){
+                    res.body(CommonResponses._OK_BUT_FAIL_BODY
                         .put("message", "Ownership doesn't exists")
                         .put("exists", false).toString());
-                return res;
+                    return res;
+                }
             }
             
-            res.body(CommonResponses._OK_BODY.put("exists", true)
-                    .put("ownership", gson.toJson(ownership)).toString());
+            Gson gson = new Gson();
+            res.body(CommonResponses._OK_BODY
+                    .put("exists", true)
+                    .put("ownership", new JSONObject(gson.toJson(ownership))).toString());
             return res;
         } catch (UnsupportedEncodingException ex) {
             res.body(CommonResponses._OK_BUT_FAIL_BODY

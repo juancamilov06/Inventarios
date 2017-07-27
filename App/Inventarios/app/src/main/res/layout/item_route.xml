@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_weight="0.7"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <ImageView app:srcCompat="@drawable/ic_item_route"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/date_label"
+            android:layout_marginTop="4dp"
+            android:text="2017/09/09"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout android:layout_weight="0.3"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
+            android:layout_width="wrap_content"
+            android:text="Progreso de la ruta"
+            android:layout_height="wrap_content" />
+
+        <com.daimajia.numberprogressbar.NumberProgressBar
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:id="@+id/progress_bar"
+            style="@style/AppTheme.NumberProgressBar"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

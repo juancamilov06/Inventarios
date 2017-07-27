@@ -17,10 +17,12 @@ import org.greenrobot.greendao.DaoException;
 @Entity
 public class Route {
 
-    @Id
+    @Id(autoincrement = true)
     private long id;
     @NotNull
     private boolean is_finished;
+    @NotNull
+    private long created;
 
     @ToMany
     @JoinEntity(
@@ -36,16 +38,17 @@ public class Route {
     @Generated(hash = 1511175683)
     private transient RouteDao myDao;
 
-    @Generated(hash = 2137650301)
-    public Route(long id, boolean is_finished) {
+    @Generated(hash = 1676858664)
+    public Route(long id, boolean is_finished, long created) {
         this.id = id;
         this.is_finished = is_finished;
+        this.created = created;
     }
 
     @Generated(hash = 467763370)
     public Route() {
     }
-
+    
     public long getId() {
         return this.id;
     }
@@ -125,6 +128,14 @@ public class Route {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public long getCreated() {
+        return this.created;
+    }
+
+    public void setCreated(long created) {
+        this.created = created;
     }
 
     /** called by internal mechanisms, do not call yourself. */

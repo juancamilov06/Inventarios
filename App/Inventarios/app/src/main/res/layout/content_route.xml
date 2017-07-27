@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="co.com.arrendamientosnutibara.main.RouteActivity"
+    tools:context="co.com.arrendamientosnutibara.main.CurrentRouteActiviy"
     tools:showIn="@layout/activity_route">
 
     <android.support.v7.widget.RecyclerView

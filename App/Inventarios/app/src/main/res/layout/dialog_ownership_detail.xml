@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:id="@+id/address_label"
                     android:layout_marginStart="2dp"
-                    android:text="CRR 88 N° 44 - 45"
+                    android:text=""
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
@@ -57,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_marginStart="2dp"
                     android:id="@+id/owner_label"
-                    android:text="Juan Camilo Villa Amaya"
+                    android:text=""
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
@@ -69,14 +69,14 @@
 
                 <co.com.arrendamientosnutibara.widgets.CenturyBoldTextView
                     android:layout_width="wrap_content"
-                    android:text="Tipo: "
+                    android:text="Barrio: "
                     android:layout_height="wrap_content" />
 
                 <co.com.arrendamientosnutibara.widgets.CenturyRegularTextView
                     android:layout_width="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:text="Casa"
-                    android:id="@+id/type_label"
+                    android:text=""
+                    android:id="@+id/neighborhood_label"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>

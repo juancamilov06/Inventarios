@@ -16,6 +16,10 @@ import java.util.List;
  */
 public class SAPTypes {
     
-    public static final List<String> dwelling = Arrays.asList("APARTAESTUDIO"
+    public static final List<String> DWELLING = Arrays.asList("APARTAESTUDIO"
             , "APARTAMENTO", "CASA", "FINCA", "CASAFINCA", "ALCOBA");
+    
+    public static final List<String> SHOPS = Arrays.asList("CONSULTORIO"
+            , "LOCAL", "GARAJE");
+    
 }

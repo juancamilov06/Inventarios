@@ -13,6 +13,12 @@
         <item name="android:statusBarColor">@color/colorAccentToolbar</item>
     </style>
 
+    <style name="AppTheme.NumberProgressBar" parent="NumberProgressBar_Default">
+        <item name="progress_unreached_color">@color/colorPrimary</item>
+        <item name="progress_reached_color">@color/colorPrimaryDark</item>
+        <item name="progress_text_color">@color/colorAccent</item>
+    </style>
+
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

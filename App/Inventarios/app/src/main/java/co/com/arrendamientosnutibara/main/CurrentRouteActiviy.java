@@ -13,10 +13,10 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.com.arrendamientosnutibara.adapters.RouteAdapter;
+import co.com.arrendamientosnutibara.adapters.CurrentRouteAdapter;
 import co.com.arrendamientosnutibara.entities.Ownership;
 
-public class RouteActivity extends AppCompatActivity {
+public class CurrentRouteActiviy extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class RouteActivity extends AppCompatActivity {
         List<Ownership> ownerships = getOwnerships();
         RecyclerView ownershipsRecycler = (RecyclerView) findViewById(R.id.ownerships_recycler);
         ownershipsRecycler.setLayoutManager(new LinearLayoutManager(this));
-        ownershipsRecycler.setAdapter(new RouteAdapter(this, R.layout.item_ownership, ownerships));
+        ownershipsRecycler.setAdapter(new CurrentRouteAdapter(R.layout.item_ownership, ownerships));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -12,6 +12,15 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.Routes" parent="AppTheme.NoActionBar">
+    </style>
+
+    <style name="AppTheme.NumberProgressBar" parent="NumberProgressBar_Default">
+        <item name="progress_unreached_color">@color/colorPrimary</item>
+        <item name="progress_reached_color">@color/colorPrimaryDark</item>
+        <item name="progress_text_color">@color/colorAccent</item>
+    </style>
+
     <style name="AppTheme.Dialog" parent="android:style/Theme.Dialog">
         <item name="android:windowNoTitle">true</item>
     </style>

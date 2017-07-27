@@ -35,6 +35,7 @@ public class Ownership {
     private String ownerName;
     @NotNull
     private long typeId;
+
     @ToOne(joinProperty = "typeId")
     private Type type;
 

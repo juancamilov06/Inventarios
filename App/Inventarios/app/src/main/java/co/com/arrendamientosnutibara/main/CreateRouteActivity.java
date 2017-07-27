@@ -3,34 +3,37 @@ package co.com.arrendamientosnutibara.main;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.google.gson.Gson;
 import com.transitionseverywhere.Slide;
 import com.transitionseverywhere.TransitionManager;
 
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import co.com.arrendamientosnutibara.application.NutibaraApplication;
 import co.com.arrendamientosnutibara.entities.Ownership;
 import co.com.arrendamientosnutibara.entities.OwnershipDao;
 import co.com.arrendamientosnutibara.helpers.Utils;
 import co.com.arrendamientosnutibara.widgets.CenturyBoldButton;
+import co.com.arrendamientosnutibara.widgets.CenturyRegularEditText;
 import co.com.arrendamientosnutibara.widgets.CenturyRegularTextView;
 
 
@@ -39,8 +42,8 @@ public class CreateRouteActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbar;
     private Context context;
     private OwnershipDao ownershipDao;
-    private boolean visible = false;
     private ViewGroup container;
+    private CenturyRegularEditText codeInput;
     private CenturyBoldButton currentRouteButton;
 
     @Override
@@ -60,17 +63,54 @@ public class CreateRouteActivity extends AppCompatActivity {
 
         container = (ViewGroup) findViewById(R.id.transitions_container);
         currentRouteButton = (CenturyBoldButton) findViewById(R.id.current_route_button);
+        codeInput = (CenturyRegularEditText) findViewById(R.id.code_input);
 
         container.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CreateRouteActivity.this, InventoryActivity.class));
+                String code = codeInput.getText().toString();
+                if(TextUtils.isEmpty(code)){
+                    showSnackBar("Debes ingresar el codigo de propiedad");
+                }
+                AndroidNetworking.get("http://192.168.0.25:4567/ownership/{code}?token=" + Utils.getAuthToken())
+                        .addPathParameter("code", code)
+                        .setPriority(Priority.IMMEDIATE)
+                        .build()
+                        .getAsJSONObject(new JSONObjectRequestListener() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    int code = response.getInt("code");
+                                    boolean success = response.getBoolean("success");
+                                    boolean exists = response.optBoolean("exists");
+                                    if (code == 200 && success){
+                                        handleResponse(response.getJSONObject("ownership"));
+                                        return;
+                                    }
+                                    if (code == 200 && !success && !exists){
+                                        showSnackBar("El inmueble no existe");
+                                        return;
+                                    }
+                                    if (code == 400){
+                                        showSnackBar("Desautenticado");
+                                        return;
+                                    }
+                                    showSnackBar("Error de autenticacion");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            @Override
+                            public void onError(ANError anError) {
+                                System.out.println("ERROR: " + anError.getErrorBody());
+                            }
+                        });
             }
         });
         container.findViewById(R.id.current_route_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CreateRouteActivity.this, RouteActivity.class));
+                startActivity(new Intent(CreateRouteActivity.this, CurrentRouteActiviy.class));
             }
         });
         changeTitleTypeface();
@@ -81,14 +121,26 @@ public class CreateRouteActivity extends AppCompatActivity {
 
     }
 
+    private void handleResponse(JSONObject response){
+        Gson gson = new Gson();
+        Ownership ownership = gson.fromJson(response.toString(), Ownership.class);
+        Dialog dialog = getDetailDialog(ownership);
+        dialog.show();
+    }
+
+    private void showSnackBar(String message){
+        Snackbar.make(findViewById(R.id.activity_create_route)
+                , message
+                , Snackbar.LENGTH_SHORT).show();
+    }
+
     private void changeTitleTypeface(){
         final Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/Century-Gothic-Bold.ttf");
         collapsingToolbar.setCollapsedTitleTypeface(tf);
         collapsingToolbar.setExpandedTitleTypeface(tf);
     }
 
-    private void animateButton(){
-        visible = true;
+    private void animateButton(boolean visible){
         TransitionManager.beginDelayedTransition(container, new Slide(Gravity.RIGHT));
         currentRouteButton.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
     }
@@ -100,11 +152,12 @@ public class CreateRouteActivity extends AppCompatActivity {
         final AlertDialog dialog = builder.create();
 
         CenturyRegularTextView addressLabel = view.findViewById(R.id.address_label);
-        addressLabel.setText("CRR 88 N° 44 45");
-        CenturyRegularTextView typeLabel = view.findViewById(R.id.type_label);
-        typeLabel.setText("Apartamento");
+        addressLabel.setText(ownership.getAddress());
+        CenturyRegularTextView neighborhoodLabel = view.findViewById(R.id.neighborhood_label);
+        neighborhoodLabel.setText(!TextUtils.isEmpty(ownership.getNeighborhood())
+                ? ownership.getNeighborhood() : "No disponible");
         CenturyRegularTextView ownerLabel = view.findViewById(R.id.owner_label);
-        ownerLabel.setText("Juan Camilo Villa Amaya");
+        ownerLabel.setText(ownership.getOwnerName());
 
         CenturyBoldButton addButton = view.findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
